@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aniket Kumar — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --teal: #1abf8a;
+    --teal-dim: rgba(26,191,138,0.12);
+    --teal-glow: rgba(26,191,138,0.25);
+    --text: #f0eeea;
+    --muted: #8a8a9a;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2.5rem 4rem;
+    max-width: 960px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--teal);
+  }
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .name-teal { color: var(--teal); }
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-bio {
+    font-size: 15px;
+    color: #b0aec0;
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #0a0a0f;
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: #22d49c; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--teal);
+    border: 0.5px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal-dim); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border2);
+  }
+  h2 {
+    font-family: var(--mono);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .skill-cell {
+    background: var(--surface);
+    padding: 1.25rem 1.5rem;
+    transition: background 0.2s;
+  }
+  .skill-cell:hover { background: var(--surface2); }
+  .skill-cat {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .skill-items {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .skill-items span {
+    display: inline-block;
+    color: var(--text);
+    background: var(--teal-dim);
+    border: 0.5px solid rgba(26,191,138,0.2);
+    border-radius: 2px;
+    padding: 1px 6px;
+    margin: 2px 2px 2px 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .project-card {
+    background: var(--surface);
+    padding: 1.75rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .project-card:hover { background: var(--surface2); }
+  .project-card:hover .project-arrow { transform: translateX(4px); color: var(--teal); }
+  .project-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
+  .project-name {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .project-arrow { font-size: 18px; color: var(--muted); transition: all 0.2s; margin-top: 2px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; max-width: 600px; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 0.5px solid var(--border2);
+    color: var(--muted);
+  }
+  .tag-teal { border-color: rgba(26,191,138,0.35); color: var(--teal); }
+
+  /* ── EXPERIENCE ── */
+  .exp-item { padding: 1.5rem 0; border-bottom: 0.5px solid var(--border); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .exp-role { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--text); }
+  .exp-date { font-family: var(--mono); font-size: 11px; color: var(--teal); }
+  .exp-org { font-size: 13px; color: var(--muted); margin-bottom: 0.6rem; }
+  .exp-points { list-style: none; }
+  .exp-points li { font-size: 13px; color: #9a98aa; padding: 0.2rem 0 0.2rem 1rem; position: relative; line-height: 1.6; }
+  .exp-points li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-family: var(--mono); font-size: 11px; top: 0.22rem; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .edu-card { background: var(--surface); padding: 1.5rem; }
+  .edu-degree { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-school { font-size: 13px; color: var(--teal); margin-bottom: 0.2rem; }
+  .edu-meta { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .contact-link {
+    background: var(--surface);
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: var(--surface2); }
+  .contact-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+  .contact-value { font-size: 14px; color: var(--text); }
+  .contact-icon { font-size: 18px; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 0.5px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  footer span { color: var(--teal); }
+
+  /* ── CURSOR DOT ── */
+  .cursor-line {
+    display: inline-block;
+    width: 2px; height: 1.1em;
+    background: var(--teal);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1rem; }
+    section, .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">AK.dev</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-tag">Available for internships — 2025</div>
+  <h1>Aniket<br><span class="name-teal">Kumar</span><span class="cursor-line"></span></h1>
+  <div class="hero-sub">CS Undergrad · Cybersecurity · Builder</div>
+  <p class="hero-bio">
+    2nd-year B.Tech student at Dayananda Sagar University specialising in Cybersecurity. I build real-world applications — from NLP-powered recommendation engines to live anomaly detection dashboards. I care about clean code, thoughtful design, and things that actually work.
+  </p>
+  <div class="hero-ctas">
+    <a href="https://github.com/Aniket-022" class="btn btn-primary" target="_blank">View GitHub →</a>
+    <a href="https://linkedin.com/in/aniket-kumar10349" class="btn btn-outline" target="_blank">LinkedIn</a>
+    <a href="mailto:aniket.kumar2986@gmail.com" class="btn btn-outline">Email Me</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Projects built</div>
+    </div>
+    <div>
+      <div class="stat-num">2nd</div>
+      <div class="stat-label">Year · CSE</div>
+    </div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Core languages</div>
+    </div>
+    <div>
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Things to learn</div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <h2>Skills</h2>
+  <div class="skills-grid fade-in">
+    <div class="skill-cell">
+      <div class="skill-cat">Languages</div>
+      <div class="skill-items">
+        <span>Python</span><span>JavaScript</span><span>HTML</span><span>CSS</span><span>SQL</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Libraries & Frameworks</div>
+      <div class="skill-items">
+        <span>Streamlit</span><span>spaCy</span><span>scikit-learn</span><span>pdfplumber</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Data & AI</div>
+      <div class="skill-items">
+        <span>NLP</span><span>TF-IDF</span><span>Cosine Similarity</span><span>REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Security Concepts</div>
+      <div class="skill-items">
+        <span>Entropy Analysis</span><span>Auth Flows</span><span>OWASP Basics</span><span>Network Security</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Tools</div>
+      <div class="skill-items">
+        <span>Git</span><span>GitHub</span><span>VS Code</span><span>Linux CLI</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Concepts</div>
+      <div class="skill-items">
+        <span>OOP</span><span>DBMS</span><span>Data Structures</span><span>OS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Things I've built</div>
+  <h2>Projects</h2>
+  <div class="projects-list fade-in">
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022/JOB-RECOMMENDER','_blank')">
+      <div class="project-top">
+        <div class="project-name">AI-Powered Job Recommender</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">Full-stack NLP web app that parses PDF resumes, scores job-listing alignment via TF-IDF & cosine similarity, and highlights skill gaps. Integrates live job APIs with smart fallback. Modular production-grade codebase.</p>
+      <div class="project-tags">
+        <span class="tag tag-teal">Featured</span>
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">spaCy</span>
+        <span class="tag">NLP</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">RapidAPI</span>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022','_blank')">
+      <div class="project-top">
+        <div class="project-name">ClearPath AI — Mobility Dashboard</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">Edge-simulated autonomous mobility dashboard monitoring live telemetry, detecting anomalies, and triggering AI-based routing decisions. Prototypes incident detection and response workflows.</p>
+      <div class="project-tags">
+        <span class="tag tag-teal">Featured</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Live Telemetry</span>
+        <span class="tag">Anomaly Detection</span>
+        <span class="tag">Event-Driven</span>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022','_blank')">
+      <div class="project-top">
+        <div class="project-name">Password Strength Analyser</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">Security tool computing Shannon entropy, detecting dictionary patterns and leet-speak substitutions, and estimating crack time under brute-force scenarios. Goes far beyond basic character-rule checks.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Entropy Modelling</span>
+        <span class="tag">Security</span>
+        <span class="tag">Pattern Detection</span>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022/Attendance-geek-','_blank')">
+      <div class="project-top">
+        <div class="project-name">Attendance Tracker</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">Browser-based utility for students to track attendance against minimum thresholds and calculate skippable classes. Responsive UI with real-time logic — zero backend required.</p>
+      <div class="project-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Real-time Logic</span>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022','_blank')">
+      <div class="project-top">
+        <div class="project-name">Expense Tracker with Daily Reminders</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">CLI expense tracker with automated daily notification reminders, category tagging, and persistent data logging. Built with Python's scheduling and file I/O modules.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Scheduling</span>
+        <span class="tag">OOP</span>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="window.open('https://github.com/Aniket-022','_blank')">
+      <div class="project-top">
+        <div class="project-name">Game Management Application</div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <p class="project-desc">Python desktop app for managing game records with a user-friendly interface and clean workflows. Strengthened OOP design and debugging capabilities.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">OOP</span>
+        <span class="tag">UI Design</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Background</div>
+  <h2>Experience & Education</h2>
+
+  <div class="fade-in">
+    <div class="exp-item">
+      <div class="exp-top">
+        <div class="exp-role">E-Cell — Startup Co-founder</div>
+        <div class="exp-date">2021 – 2022</div>
+      </div>
+      <div class="exp-org">High School Entrepreneurship Cell · Delhi</div>
+      <ul class="exp-points">
+        <li>Built and pitched a chewing-gum brand from scratch — product development, branding, and go-to-market strategy.</li>
+        <li>Developed cross-functional teamwork, leadership, and iterative product thinking under real constraints.</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+  <div class="section-label" style="margin-bottom: 1.5rem;">Education</div>
+  <div class="edu-grid fade-in">
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech · CS (Cybersecurity)</div>
+      <div class="edu-school">Dayananda Sagar University</div>
+      <div class="edu-meta">Bengaluru · 2023 – Present · 2nd Year</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Higher Secondary (12th)</div>
+      <div class="edu-school">Delhi Public School North</div>
+      <div class="edu-meta">Bengaluru · 2022 – 2023</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Secondary (10th)</div>
+      <div class="edu-school">Tagore International School</div>
+      <div class="edu-meta">Delhi · 2020 – 2021</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2>Contact</h2>
+  <p style="color: var(--muted); font-size: 14px; margin-bottom: 2rem; max-width: 480px;">Open to summer internship opportunities across software engineering, data analytics, and cybersecurity. Let's build something.</p>
+  <div class="contact-grid fade-in">
+    <a href="mailto:aniket.kumar2986@gmail.com" class="contact-link">
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">aniket.kumar2986@gmail.com</div>
+      </div>
+      <div class="contact-icon">→</div>
+    </a>
+    <a href="https://github.com/Aniket-022" class="contact-link" target="_blank">
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/Aniket-022</div>
+      </div>
+      <div class="contact-icon">→</div>
+    </a>
+    <a href="https://linkedin.com/in/aniket-kumar10349" class="contact-link" target="_blank">
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/aniket-kumar10349</div>
+      </div>
+      <div class="contact-icon">→</div>
+    </a>
+    <a href="tel:9902859647" class="contact-link">
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+91 9902859647</div>
+      </div>
+      <div class="contact-icon">→</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  Built by <span>Aniket Kumar</span> · Bengaluru · 2025 · Open to work
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
